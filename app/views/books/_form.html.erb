@@ -1,0 +1,86 @@
+
+<% if flash[:message] != nil %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Message!</strong> <%= flash[:message] %></strong>
+  <button type="button" onclick="function(){<%flash.delete(:message)%>}" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<%end%>
+
+
+
+<div class="card" style="width: 28rem;margin:auto;background: lightblue;margin-top: 1%;">
+
+ <div class="card-body center">
+   <%= form_with model:book do |form|%>
+   <div class="mb-3">
+    <%= form.label :title, "Title of Book" %>
+    <%= form.text_field :title, class: "form-control",
+    placeholder: "Enter your title here", required: true%>
+    <% book.errors.full_messages_for(:title).each do |message| %>
+    <p style="color:red"><%=message%></p>
+    <%end%>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.label :price, "Price of Book" %>
+    <%= form.number_field :price, step:"0.01", class: "form-control",
+    placeholder: "Enter your price here", required: true%>
+    <% book.errors.full_messages_for(:price).each do |message| %>
+    <p style="color:red"><%=message%></p>
+    <%end%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :stock_quntity, "Stock Quantity of Book" %>
+    <%= form.number_field :stock_quntity, class: "form-control",
+    placeholder: "Enter your Stock Quantity here", required: true%>
+    <% book.errors.full_messages_for(:stock_quntity).each do |message| %>
+    <p style="color:red"><%=message%></p>
+    <%end%>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.label :description, "Description of Book" %>
+    <%= form.text_area :description, size: "40x5", placeholder: "Enter your description here", required: true %>
+    <% book.errors.full_messages_for(:stock_quntity).each do |message| %>
+    <p style="color:red"><%=message%></p>
+    <%end%>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.label :image, "Image of Book" %>
+    <%= form.file_field :image, require: true%>
+    <% book.errors.full_messages_for(:image).each do |message| %>
+    <p style="color:red"><%=message%></p>
+    <%end%>
+  </div>
+ <% author_array = Author.all.map { |author| [author.name, author.id] }       %>
+  <div class="mb-3">
+    <%= form.label :author, "Author of Book" %>
+   
+     <%= form.select :author_id, options_for_select(author_array) %>
+    
+    
+  </div>
+ 
+
+
+  <div class="mb-3">
+   <%= form.submit "create book", class: "btn btn-primary" %>
+ </div>
+
+<%end%>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+

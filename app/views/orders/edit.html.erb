@@ -1,0 +1,76 @@
+<% if flash[:message] != nil %>
+ <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Message!</strong> <%= flash[:message] %></strong>
+  <button type="button"  class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<%end%>
+
+
+<div class="container " style="margin-top: 1rem ;">
+	<div class="row">
+		<div class="col-6">
+			<div class="card" style="width: 100%;height: 30rem;">
+
+				<div class="card-body">
+					<%= image_tag @book.image,  :style => "width:100%;height:28rem; border: 1px solid red"  %>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="card" style="width: 100%;height: 30rem;">
+
+				<div class="card-body " >
+					<div class="row">
+						<div class="col">
+							<h3 class="card-title fs-5">Book details : </h3>
+							<h5 class="card-title fs-6">Book Name: <%=@book.title%></h5>
+							<p class="card-text fs-6">Book Price : <%=@book.price%></p>
+
+							<p class="card-text fs-6">Book Price : <%= @book.price%> </p>
+
+							<p class="card-text fs-6">Stock Quantity : <%=@book.stock_quntity%></p>
+							<p class="card-text fs-6">description : <%=@book.description%></p>
+							<p class="card-text fs-6">Author : <%=@book.author.name%></p>
+							<p class="card-text fs-6">Author DOB : <%=@book.author.dob%></p>
+							<%= form_with model:@order, url:book_order_path(@book.id,params[:id]) do |form| %>
+							
+							<div class="mb-3">
+								<%= form.label :stock_quntity, "Quantity" %>
+								<%= form.number_field :stock_quntity, class: "form-control",
+								placeholder: "Enter your Product Quantity here", required: true%>
+							</div>
+							<div class="mb-3">
+								<% if @book.stock_quntity == 0 %>
+									<%= form.submit "Cunfirm Order",class:"btn btn-secondary m-1 disabled"%>
+								<% else %>
+									<%= form.submit "Cunfirm Order",class:"btn btn-primary m-1 "%>
+								<%end%>
+								<%= link_to "cancel order ", books_path, class:"btn btn-danger "%>
+
+							</div>
+
+							<%end%>
+
+
+						</div>
+						<div class="col" >
+							<h3 class="card-title fs-5">User details : </h3>
+							<h5 class="card-title fs-6">User Name: <%=current_account.name%></h5>
+							<p class="card-text fs-6">delivery address : <%=current_account.address%></p>
+							<p class="card-text fs-6">email address : <%=current_account.email%></p>
+							<p class="card-text fs-6">number  : <%=current_account.number%></p>
+								
+						</div>
+						
+						
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

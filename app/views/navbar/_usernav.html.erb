@@ -1,0 +1,149 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/books">Book Store</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/books">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/books/1/orders/users_orders">View Your Orders</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/authors">View All Authors</a>
+        </li>
+        <%# <li class="nav-item">
+          <a class="nav-link" href="#">View Reviews</a>
+        </li> %>
+
+      </ul>
+      
+
+      <%# add to cart option %>
+      <div class="d-flex">
+       <div class=" dropdown">
+        <a class="dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;">
+
+          <%= image_tag "cart.png", {style:'height:38px;width:38px;'}  %>
+
+        </a>
+        <%
+        @carts = Cart.all.where(account_id:current_account.id)
+        if @carts != nil 
+        %>
+
+        <ul class="dropdown-menu p-2" style= "left: -455px;" aria-labelledby="cartDropdown">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">img</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">remove</th>
+                <th scope="col">checkout</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 
+
+              @total_price = 0
+              @carts.each do |cart|
+                book = Book.find(cart.book_id)
+                @total_price = @total_price + book.price
+              %>
+
+              <tr>
+                <li class="dropdown-item ">
+                  <span class="item">
+
+                    <span class="item-left">
+                      <td>
+                       <%= image_tag book.image, {style:'height:44px;width:45px;'}  %>
+                     </td>
+                     <span class="item-info">
+                      <td>
+                        <span><%= book.title%></span>
+                      </td>
+                      <td>
+                        <span style="color: blue;"><%=book.price%> Rs</span>
+                      </td>
+                      <td>
+                        <span> <%= link_to "Remove", book_cart_path(book.id, cart.id), data: {
+                          turbo_method: :delete
+                        }, class:"btn btn-warning"%></span>
+                      </td>
+                      <td>
+                        <span>  <a href="/books/<%=book.id%>/orders/new" class="btn btn-success" >checkOut</a></span>
+                      </td>
+                    </span>
+
+                  </span>
+
+                </span>
+              </li>
+              <tr>
+                <%end%>
+
+              </tbody>
+              </table>
+              <li class="dropdown-item">
+                <span style="color: blue;">Total Price : <%=@total_price%> Rs</span>
+              </li>
+            
+
+            </ul>
+            <%else%>
+            <ul class="dropdown-menu" style= "left: -295px;" aria-labelledby="cartDropdown">
+              <span style="margin: 1rem; padding: 1rem;color: darkblue;">Your cart is empty</span>
+            </ul>
+            <%end%>
+          </div>
+
+        </div>
+
+
+
+        <div class="d-flex">
+         <div class=" dropdown">
+          <a class="dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag current_account.profile_image , {style:'height:44px;width:45px;'} %>
+          </a>
+
+          <ul class="dropdown-menu" style= "left: -295px;" aria-labelledby="navbarDropdown">
+
+            <li><span class="dropdown-item" >Name : <%=current_account.name%></span></li>
+            <li><span class="dropdown-item" >Email : <%=current_account.email%></span></li>
+            <li><span class="dropdown-item" >Type : <%=current_account.type%></span></li>
+
+
+            <li><hr class="dropdown-divider"></li>
+            <li>
+
+              <%= link_to "Update Account", edit_account_registration_path, class:"dropdown-item"%>
+            </li>
+
+            <li>
+
+              <%= link_to "Delete Account", account_registration_path, data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+              } , class:"dropdown-item"%>
+            </li>
+            <li><%=link_to "log out", destroy_account_session_path, data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure?"
+            } , class:"dropdown-item" %></li>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>

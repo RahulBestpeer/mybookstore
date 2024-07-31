@@ -1,0 +1,53 @@
+
+
+<% if flash[:message] != nil %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Message!</strong> <%= flash[:message] %></strong>
+  <button type="button" onclick="function(){<%flash.delete(:message)%>}" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<%end%>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <% 
+        @books.each do |book|
+    %>
+    <div class="col-sm-4 mt-2">
+      <div class="card" style="width: 23rem;height: 39rem;">
+     
+        <%= image_tag book.image, class:"card-img-top", :style => "height:20rem; border: 1px solid red"  %>
+
+        <div class="card-body">
+         <h5 class="card-title">Book Name: <%=book.title%></h5>
+         <p class="card-text">Book Price : <%=book.price%></p>
+         <p class="card-text">Stock Quantity : <%=book.stock_quntity%></p>
+          <p class="card-text">description : <%=book.description%></p>
+         <p class="card-text">Author : <%=book.author.name%></p>
+         <% if current_account.type == "Admin" %>
+          <a href="/books/<%=book.id%>/edit" class="btn btn-primary">Update</a>
+     
+          <%= link_to "Destroy", book_path(book.id), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } , class:"btn btn-warning"%>
+
+          <%else%>
+           
+             <%= link_to "Add To Cart", book_carts_path(book.id), data: {
+                    turbo_method: :post,
+                    turbo_confirm: "Are you sure?"
+                  } , class:"btn btn-success"%>
+             <%= link_to "Check Out", new_book_order_path(book.id), class:"btn btn-primary"%>
+            
+          <%end%>
+          <%= link_to "Show Book", book_path(book.id), class:"btn btn-success"%>
+        </div>
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>

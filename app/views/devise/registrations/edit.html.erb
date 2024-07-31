@@ -1,0 +1,104 @@
+
+<%if !resource.errors.full_messages.empty?
+
+  
+   %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Message! </strong> Somthing is wrong! data not saved
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+<%end%>
+<div class="container">
+  <div class="card " style="width: 40rem;margin: auto; margin-top: 3rem; padding: 0.5rem;">
+    <%# <img src="..." class="card-img-top" alt="..."> %>
+
+    <div class="col d-flex justify-content-center" >
+      <h3>SignUp</h3>
+    </div>
+    
+    <div class="card-body">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+ 
+  <div class="field mb-3">
+        <%= f.label :name, class:"form-label"%><br />
+        <%= f.text_field :name , class:"form-control"%>
+        <% resource.errors.full_messages_for(:name).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :number, class:"form-label"%><br />
+        <%= f.number_field :number , class:"form-control"%>
+        <% resource.errors.full_messages_for(:number).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :email, class:"form-label"%><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" , class:"form-control"%>
+        <% resource.errors.full_messages_for(:email).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+
+
+      <div class="field mb-3">
+        <%= f.label :password, class:"form-label" %>
+        <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+        <% resource.errors.full_messages_for(:password).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :password_confirmation, class:"form-label" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+        <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :type, class:"form-label" %><br />
+        <%= f.select :type, [['User', 'User'], ['Admin', 'Admin']] , class:"form-control"%>
+        <% resource.errors.full_messages_for(:type).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+
+
+      <div class="field mb-3">
+        <%= f.label :address, class:"form-label" %><br />
+        <%= f.text_area :address, class:"form-control"%>
+        <% resource.errors.full_messages_for(:address).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+
+        <div class="field mb-3">
+        <%= f.label :profile_image, class:"form-label" %><br />
+        <%= f.file_field :profile_image, accept:"image/png, image/gif, image/jpeg", class:"form-control"%>
+        <% resource.errors.full_messages_for(:profile_image).each do |message| %>
+           <p style="color:red"><%=message%></p>
+          <%end%>
+      </div>
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+  
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+</div>
+    
+     
+   </div>
+ </div>
+

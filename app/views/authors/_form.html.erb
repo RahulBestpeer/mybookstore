@@ -1,0 +1,35 @@
+ <% if flash[:message] != nil %>
+ <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Message!</strong> <%= flash[:message] %></strong>
+  <button type="button"  class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<%end%>
+
+<div class="card" style="width: 28rem;margin:auto;background: lightblue;margin-top: 1%;">
+
+ <div class="card-body center">
+   <%=form_with model: author do |form|%>
+   <div class="mb-3">
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name, class: "form-control",
+    placeholder: "Enter your name here", required: true%>
+    <% author.errors.full_messages_for(:name).each do |message| %>
+    <p style="color:red"><%=message%></p>
+    <%end%>
+  </div>
+  <div class="mb-3">
+    <%= form.label :dob, "Date Of Birth" %>
+    <%= form.date_field :dob, class: "form-control",
+    placeholder: "Enter author date of Birth here", required: true%>
+    <% author.errors.full_messages_for(:dob).each do |message| %>
+    <p style="color:red"><%=message%></p>
+    <%end%>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "create author", class: "btn btn-primary" %>
+ </div>
+ <%end%>
+</div>
+</div>

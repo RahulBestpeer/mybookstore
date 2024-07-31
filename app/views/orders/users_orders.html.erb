@@ -1,0 +1,44 @@
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">id</th>
+			<th scope="col">Date Submit</th>
+			<th scope="col">Status</th>
+			<th scope="col">Total</th>
+			<th scope="col">Order Quantity</th>
+			<th scope="col">User Name</th>
+			<th scope="col">Delivery Address</th>
+			<th scope="col">Book Name</th>
+			<th scope="col">Cancel Order</th>
+			
+
+		</tr>
+	</thead>
+	<tbody>
+		<% @order.each do |order|
+			book = order.books.first
+
+		%>
+
+		<tr>
+			<th scope="row"><%=order.id%></th>
+			<td><%=order.date_submit%></td>
+			<td><%=order.status%></td>
+			<td><%=order.total%></td>
+			<td><%=order.stock_quntity%></td>
+			<td><%=current_account.name%></td>
+			<td><%=current_account.address%></td>
+			<td><%=book.title%></td>
+			<td><%= link_to "Cancel Order", book_order_path(book.id, order.id), data: {
+				turbo_method: :delete,
+				turbo_confirm: "Are you sure?"
+			} , class:"btn btn-warning"%></td>
+
+
+		</tr>
+		<%end%>
+
+	</tbody>
+</table>
