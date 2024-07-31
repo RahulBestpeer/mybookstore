@@ -10,7 +10,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
 
-  config.action_mailer.default_url_options = { host: 'mybookstore-t1c1.onrender.com', port: 10000 }
+  config.action_mailer.default_url_options = { host: 'mybookstore-t1c1.onrender.com' }
 
 
   config.action_mailer.delivery_method = :letter_opener
