@@ -10,6 +10,35 @@ Rails.application.configure do
   config.active_storage.service = :local
 
 
+  config.action_mailer.default_url_options = { host: 'mybookstore-t1c1.onrender.com', port: 10000 }
+
+
+  config.action_mailer.delivery_method = :letter_opener
+ # config.action_mailer.delivery_method = :smtp
+ #  config.action_mailer.smtp_settings = {
+ #    address:         'smtp.gmail.com',
+ #    port:            587,
+ #    domain:          'mybookstore-t1c1.onrender.com',
+ #    user_name:       'patel940740@gmail.com',
+ #    password:        'vpjbldtkmrqfenbz',
+ #    authentication:  'plain',
+ #    enable_starttls: true
+ #   }
+
+    config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.example.com',  # SMTP server address
+    port:                 587,                   # Port number (587 for TLS, 465 for SSL)
+    domain:               'mybookstore-t1c1.onrender.com',         # Your domain (used in the HELO/EHLO command)
+    user_name:            ENV['EMAIL_USERNAME'], # Your SMTP username (email address)
+    password:             ENV['EMAIL_PASSWORD'], # Your SMTP password
+    authentication:       'plain',               # Authentication method (plain, login, or cram_md5)
+    enable_starttls_auto: true                   # Enable TLS (recommended for security)
+  }
+
+
+  
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
