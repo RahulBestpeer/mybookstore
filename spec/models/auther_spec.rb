@@ -12,17 +12,16 @@ RSpec.describe Author, type: :model do
           expect(author1).to be_valid
         end
         it 'name presente error message must be' do
-          author1 = Author.new(name:"", dob:"Wed, 03 Jul 2024")
+          author1.name = nil
           author1.save
           expect(author1.errors[:name]).to include("can't be blank")
         end
         it 'is valid with a unique name' do
-          author2 = Author.create(name: 'Unique Product', dob:Date.new)
-          author3 = Author.new(name: 'Unique Product', dob:Date.new)
+          author2 = Author.new(name: author1.name, dob:Date.new)
 
-          expect(author2).to be_valid
-          expect(author3).not_to be_valid
-          expect(author3.errors[:name]).to include('has already been taken')
+          expect(author1).to be_valid
+          expect(author2).not_to be_valid
+          expect(author2.errors[:name]).to include('has already been taken')
         end
       end
 

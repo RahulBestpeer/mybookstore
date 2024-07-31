@@ -6,7 +6,7 @@ class Book < ApplicationRecord
 	before_destroy :cleanup_associations
 
 
-	validates :title, presence:true
+	validates :title, presence:true, uniqueness:true
 	validates :description, presence:true, length:{in: 10..500}
 	validates :price, presence:true, numericality: true
 	validates :stock_quntity, presence:true, numericality: { only_integer: true }

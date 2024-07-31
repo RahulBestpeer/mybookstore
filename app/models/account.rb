@@ -11,10 +11,10 @@ class Account < ApplicationRecord
   :recoverable, :rememberable, :validatable, :confirmable
 
 
-  validates :name, presence:true
-  validates :address, presence:true, length:{ in: 10..100 }, uniqueness:true
   validates :number, presence:true, length:{ is: 10}
-
+  validates :type, presence:true
+  validates :name, presence:true
+  validates :address, presence:true, length:{ in: 10..100 }
  
 
 end
