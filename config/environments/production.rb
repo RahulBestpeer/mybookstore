@@ -9,21 +9,36 @@ Rails.application.configure do
   # Store files locally.
   config.active_storage.service = :local
 
-  config.action_mailer.default_url_options = { host: 'https://mybookstore-t1c1.onrender.com/', port: 10000 }
+  # config.action_mailer.default_url_options = { host: 'https://mybookstore-t1c1.onrender.com/', port: 10000 }
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
  
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com', # SMTP server address
-    port: 587, # Port number (587 for TLS, 465 for SSL)
-    domain: 'gmail.com', # Your domain (used in the HELO/EHLO command)
-    user_name: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP username (email address)
-    password: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP password
-    authentication: 'plain', # Authentication method (plain, login, or cram_md5)
-    #enable_starttls_auto: true # Enable TLS (recommended for security)
-  }
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.gmail.com', # SMTP server address
+  #   port: 587, # Port number (587 for TLS, 465 for SSL)
+  #   domain: 'gmail.com', # Your domain (used in the HELO/EHLO command)
+  #   user_name: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP username (email address)
+  #   password: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP password
+  #   authentication: 'plain', # Authentication method (plain, login, or cram_md5)
+  #   #enable_starttls_auto: true # Enable TLS (recommended for security)
+  # }
+
+
+  config.action_mailer.raise_delivery_errors = false
+ config.action_mailer.default_url_options = { host: 'mybookstore-t1c1.onrender.com', protocol: 'http' }
+ config.action_mailer.perform_deliveries = true
+ config.action_mailer.default :charset => "utf-8"
+ config.action_mailer.delivery_method = :smtp
+ config.action_mailer.smtp_settings = {
+ address: 'smtp.gmail.com',
+ port: 587,
+ user_name: Rails.application.credentials.smtp[:SMTP_USERNAME],
+ password: Rails.application.credentials.smtp[:SMTP_PASSWORD],
+ authentication: :plain,
+ enable_starttls_auto: true
+ }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
