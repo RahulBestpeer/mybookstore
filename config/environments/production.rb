@@ -18,11 +18,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com', # SMTP server address
     port: 587, # Port number (587 for TLS, 465 for SSL)
-    domain: 'mybookstore-t1c1.onrender.com', # Your domain (used in the HELO/EHLO command)
+    domain: 'gmail.com', # Your domain (used in the HELO/EHLO command)
     user_name: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP username (email address)
     password: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP password
     authentication: 'plain', # Authentication method (plain, login, or cram_md5)
-    enable_starttls_auto: true # Enable TLS (recommended for security)
+    #enable_starttls_auto: true # Enable TLS (recommended for security)
   }
 
   # Eager load code on boot. This eager loads most of Rails and
