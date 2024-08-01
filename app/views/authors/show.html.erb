@@ -53,8 +53,10 @@
           <%else%>
            
              <%= link_to "Check Out", new_book_order_path(book.id), class:"btn btn-primary"%>
-             <a href="/books/<%=book.id%>/edit" class="btn btn-primary">Add To Cart</a>
-     
+             <%= link_to "Add To Cart", book_carts_path(book.id), data: {
+                    turbo_method: :post,
+                    turbo_confirm: "Are you sure?"
+                  } , class:"btn btn-success"%>
           <%end%>
           <%= link_to "Show Book", book_path(book.id), class:"btn btn-success"%>
         </div>

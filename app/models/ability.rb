@@ -3,55 +3,50 @@
 class Ability
   include CanCan::Ability
 
-    # def initialize(user)
-    # # Define default abilities for all users
-    # can :read, :all  # All users can read all resources
+  # def initialize(user)
+  # # Define default abilities for all users
+  # can :read, :all  # All users can read all resources
 
-    # if user.present?
-    #   case user
-    #   when User
-    #     # Define abilities for users
-    #     can :manage, User, id: user.id  # Users can manage their own profile
-    #     can :index, User
-    #     # Define other abilities for users
+  # if user.present?
+  #   case user
+  #   when User
+  #     # Define abilities for users
+  #     can :manage, User, id: user.id  # Users can manage their own profile
+  #     can :index, User
+  #     # Define other abilities for users
 
-    #   when Admin
-    #     # Define abilities for admins
-    #     can :manage, :all  # Admins can manage all resources
-    #     # Define other abilities for admins
-    #   end
-    # end
+  #   when Admin
+  #     # Define abilities for admins
+  #     can :manage, :all  # Admins can manage all resources
+  #     # Define other abilities for admins
+  #   end
+  # end
 
-
-
-    def initialize(user)
+  def initialize(user)
     # Define default abilities for all users
     # can :read, :all  # All users can read all resources
-    
 
-    if user.present?
-      # Define abilities for logged-in users
-      can :manage, User, id: user.id  # Users can manage their own profile
-      
+    return unless user.present?
 
-      if user.is_a?(Admin)
-        # Define abilities for admins
-        can :read, :all
-        can :manage, Book  # Admins can manage all books
-        can :manage, Author  # Admins can manage all author
-        can :manage, User  # Admins can manage all user
-        can :manage, Order  # Admins can manage all order
+    # Define abilities for logged-in users
+    can :manage, User, id: user.id # Users can manage their own profile
 
-      elsif user.is_a?(User)
-        can :read, Book
-        can :read, Author
-        can :manage, Order  
-        can :manage, Cart
+    if user.is_a?(Admin)
+      # Define abilities for admins
+      can :read, :all
+      can :manage, Book # Admins can manage all books
+      can :manage, Author # Admins can manage all author
+      can :manage, User # Admins can manage all user
+      can :manage, Order # Admins can manage all order
 
-        cannot :read, User
-        cannot :read, Order
-        
-      end
+    elsif user.is_a?(User)
+      can :read, Book
+      can :read, Author
+      can :manage, Order
+      can :manage, Cart
+
+      cannot :read, User
+      cannot :read, Order
 
     end
   end

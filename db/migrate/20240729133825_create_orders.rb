@@ -1,8 +1,8 @@
 class CreateOrders < ActiveRecord::Migration[7.1]
   def change
-     create_table :orders do |t|
+    create_table :orders do |t|
       t.date :date_submit
-      t.integer :status, default:0
+      t.integer :status, default: 0
       t.decimal :subtotal
       t.decimal :tax, default: 18
       t.decimal :total

@@ -22,6 +22,6 @@ RSpec.describe Cart, type: :model do
   it 'is invalid without an associated account' do
     cart = FactoryBot.build(:cart, account: nil)
     expect(cart).not_to be_valid
-    expect(cart.errors[:account]).to include("must exist")
+    expect(cart.errors[:account]).to include('must exist')
   end
 end

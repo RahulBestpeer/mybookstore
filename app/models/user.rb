@@ -1,4 +1,2 @@
 class User < Account
- 
-
 end

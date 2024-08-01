@@ -31,8 +31,6 @@ RSpec.describe User, type: :model do
     expect(user.errors[:name]).to include("can't be blank")
   end
 
-  
-
   it 'is invalid without an address' do
     user = FactoryBot.build(:user, address: nil)
     expect(user).not_to be_valid
@@ -78,6 +76,7 @@ RSpec.describe User, type: :model do
 
   # Devise modules
   it 'includes Devise modules' do
-    expect(User.devise_modules).to include(:database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable)
+    expect(User.devise_modules).to include(:database_authenticatable, :registerable, :recoverable, :rememberable,
+                                           :validatable, :confirmable)
   end
 end

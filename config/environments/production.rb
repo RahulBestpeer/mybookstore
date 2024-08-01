@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -9,36 +9,22 @@ Rails.application.configure do
   # Store files locally.
   config.active_storage.service = :local
 
-
   config.action_mailer.default_url_options = { host: 'https://mybookstore-t1c1.onrender.com/', port: 10000 }
 
-
   config.action_mailer.delivery_method = :letter_opener
- # config.action_mailer.delivery_method = :smtp
- #  config.action_mailer.smtp_settings = {
- #    address:         'smtp.gmail.com',
- #    port:            587,
- #    domain:          'mybookstore-t1c1.onrender.com',
- #    user_name:       'patel940740@gmail.com',
- #    password:        'vpjbldtkmrqfenbz',
- #    authentication:  'plain',
- #    enable_starttls: true
- #   }
-
-    config.action_mailer.delivery_method = :smtp
+ 
+  config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    address:              'smtp.example.com',  # SMTP server address
-    port:                 587,                   # Port number (587 for TLS, 465 for SSL)
-    domain:               'mybookstore-t1c1.onrender.com',         # Your domain (used in the HELO/EHLO command)
-    user_name:            ENV['EMAIL_USERNAME'], # Your SMTP username (email address)
-    password:             ENV['EMAIL_PASSWORD'], # Your SMTP password
-    authentication:       'plain',               # Authentication method (plain, login, or cram_md5)
-    enable_starttls_auto: true                   # Enable TLS (recommended for security)
+    address: 'smtp.gmail.com', # SMTP server address
+    port: 587, # Port number (587 for TLS, 465 for SSL)
+    domain: 'mybookstore-t1c1.onrender.com', # Your domain (used in the HELO/EHLO command)
+    user_name: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP username (email address)
+    password: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP password
+    authentication: 'plain', # Authentication method (plain, login, or cram_md5)
+    enable_starttls_auto: true # Enable TLS (recommended for security)
   }
 
-
-  
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -86,16 +72,16 @@ Rails.application.configure do
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
-    .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
+                                       .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
+                                       .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
   # want to log everything, set the level to "debug".
-  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.log_level = ENV.fetch('RAILS_LOG_LEVEL', 'info')
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

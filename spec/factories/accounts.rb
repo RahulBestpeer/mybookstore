@@ -6,9 +6,8 @@ FactoryBot.define do
     address { Faker::Address.full_address }
     password { 'Password1!' }
     password_confirmation { 'Password1!' }
-    type { 'User' } 
-    
-    
+    type { 'User' }
+
     after(:build) do |user|
       user.profile_image.attach(
         io: File.open(Rails.root.join('spec', 'factories', 'boy.png')),
@@ -25,9 +24,8 @@ FactoryBot.define do
     address { Faker::Address.full_address }
     password { 'Password1!' }
     password_confirmation { 'Password1!' }
-    type { 'User' } 
-    
-    
+    type { 'User' }
+
     after(:build) do |user|
       user.profile_image.attach(
         io: File.open(Rails.root.join('spec', 'factories', 'boy.png')),
