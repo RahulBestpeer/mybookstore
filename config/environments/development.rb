@@ -11,8 +11,8 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     domain: 'localhost:3000',
-    user_name: ENV.fetch('BUNDLER_VERSION', nil), # Your SMTP username (email address)
-    password: ENV.fetch('BUNDLER_VERSION', nil),
+    user_name: ENV.fetch('EMAIL_USERNAME', nil), # Your SMTP username (email address)
+    password: ENV.fetch('EMAIL_PASSWORD', nil),
     authentication: 'plain',
     enable_starttls: true
   }
